@@ -54,8 +54,6 @@ a:hover { text-decoration-thickness: 2px; }
 .site-header nav a:hover { background: #e6e9ed; }
 .site-header nav a[aria-current="page"] { background: var(--ink); color: #fff; }
 
-.draft-banner { background: var(--partial-bg); border-bottom: 1px solid #e8d6a8; margin: -2rem 0 2rem; }
-.draft-banner p { max-width: var(--max); margin: 0 auto; padding: .6rem 1.25rem; color: var(--partial); }
 
 main { padding: 2rem 0 3rem; }
 h1 { font-size: clamp(1.8rem, 1.4rem + 1.6vw, 2.5rem); line-height: 1.2; margin: 0 0 1rem; }
@@ -94,7 +92,6 @@ code { background: var(--surface); padding: .1em .35em; border-radius: 4px; font
 .rating-link { text-decoration: none; display: inline-flex; flex-wrap: wrap; gap: .3rem; align-items: center; padding: .25rem; border-radius: var(--radius); }
 .rating-link:hover .rating { text-decoration: underline; }
 .badge { display: inline-block; font-size: .75rem; font-weight: 600; padding: .05rem .45rem; border-radius: 4px; }
-.badge-prelim { border: 1px dashed var(--muted); color: var(--muted); background: #fff; }
 
 /* Tables */
 .table-scroll { overflow-x: auto; margin: 1rem 0; border: 1px solid var(--line); border-radius: var(--radius); }

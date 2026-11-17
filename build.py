@@ -43,8 +43,7 @@ def anchor(cid):
 def badge(result, link=None):
     r = result.get("rating", "untested")
     info = RATINGS[r]
-    prelim = "" if result.get("verified") else ' <span class="badge badge-prelim">Preliminary</span>'
-    inner = f'<span class="rating rating-{r}"><span aria-hidden="true" class="icon">{info["icon"]}</span> {info["label"]}</span>{prelim}'
+    inner = f'<span class="rating rating-{r}"><span aria-hidden="true" class="icon">{info["icon"]}</span> {info["label"]}</span>'
     return f'<a href="{link}" class="rating-link">{inner}</a>' if link else inner
 
 
@@ -66,17 +65,22 @@ def all_verified():
     return all(r.get("verified") for c in CAPTCHAS for r in c["results"].values())
 
 
-NAV = [("index.html", "Home"), ("scorecard.html", "Scorecard"), ("checklist.html", "Developer checklist"), ("methods.html", "Methods &amp; sources")]
+# Part 2 pages appear automatically once their content file exists in content/.
+HAS_CHECKLIST = (ROOT / "content/checklist.html").exists()
+HAS_METHODS = (ROOT / "content/methods.html").exists()
+
+NAV = [("index.html", "Home"), ("scorecard.html", "Scorecard")]
+if HAS_CHECKLIST:
+    NAV.append(("checklist.html", "Developer checklist"))
+if HAS_METHODS:
+    NAV.append(("methods.html", "Methods &amp; sources"))
 
 
 def page(filename, title, body, current=None):
+    cur = current or filename
     nav = "".join(
-        f'<li><a href="{href}"{" aria-current=\"page\"" if href == (current or filename) else ""}>{label}</a></li>'
+        '<li><a href="{}"{}>{}</a></li>'.format(href, ' aria-current="page"' if href == cur else "", label)
         for href, label in NAV
-    )
-    draft = "" if all_verified() else (
-        '<div class="draft-banner" role="note"><p><strong>Draft:</strong> ratings marked Preliminary come from published reports '
-        'and haven\'t been confirmed by hands-on testing yet.</p></div>'
     )
     full_title = SITE_NAME if filename == "index.html" else f"{title} | {SITE_NAME}"
     doc = f"""<!DOCTYPE html>
@@ -97,7 +101,6 @@ def page(filename, title, body, current=None):
   </div>
 </header>
 <main id="main" tabindex="-1">
-  {draft}
   <div class="wrap">
     <h1>{title}</h1>
     {body}
@@ -128,6 +131,7 @@ def build_home():
     <li class="rating-fail"><span aria-hidden="true" class="icon">{RATINGS['fail']['icon']}</span> {n['fail']} fail</li>
   </ul>
 </li>""")
+    checklist_button = '  <a class="button button-secondary" href="checklist.html">Read the developer checklist</a>' if HAS_CHECKLIST else ""
     body = f"""{content('home-intro.html')}
 <section aria-labelledby="results-heading">
   <h2 id="results-heading">Results at a glance</h2>
@@ -135,24 +139,25 @@ def build_home():
 </section>
 <div class="cta">
   <a class="button" href="scorecard.html">See the scorecard</a>
-  <a class="button button-secondary" href="checklist.html">Read the developer checklist</a>
+{checklist_button}
 </div>"""
     page("index.html", "Why CAPTCHAs lock disabled users out", body)
 
 
 def build_comparison():
-    head = "".join(f'<th scope="col"><a href="{c["id"]}.html">{e(c["name"])}</a></th>' for c in CAPTCHAS)
+    head = "".join('<th scope="col"><a href="{}.html">{}</a></th>'.format(c["id"], e(c["name"])) for c in CAPTCHAS)
     groups = []
     for g in GROUPS:
         rows = [f'<tr class="group-row"><th scope="rowgroup" colspan="{len(CAPTCHAS) + 1}">{e(g["label"])}</th></tr>']
         for cid in g["criteria"]:
             cr = CRITERIA[cid]
             cells = "".join(
-                f'<td>{badge(c["results"].get(cid, {}), f"{c["id"]}.html#{anchor(cid)}")}</td>' for c in CAPTCHAS
+                "<td>" + badge(c["results"].get(cid, {}), c["id"] + ".html#" + anchor(cid)) + "</td>" for c in CAPTCHAS
             )
             rows.append(f'<tr><th scope="row"><span class="crit-id">{cid}</span> {e(cr["name"])} <span class="level">({cr["level"]})</span></th>{cells}</tr>')
         groups.append(f'<tbody>{"".join(rows)}</tbody>')
     totals = "".join(f"<td>{counts_text(counts(c))}</td>" for c in CAPTCHAS)
+    ratings_link = '<p>What the ratings mean: see <a href="methods.html#ratings">rating definitions</a>.</p>' if HAS_METHODS else ""
     body = f"""<p class="lede">All four CAPTCHAs across the 10 WCAG 2.2 criteria, grouped by who each criterion affects most. Select a rating to read the note behind it.</p>
 <div class="table-scroll" role="region" aria-labelledby="cmp-caption" tabindex="0">
 <table class="compare">
@@ -162,7 +167,7 @@ def build_comparison():
   <tfoot><tr><th scope="row">Totals</th>{totals}</tr></tfoot>
 </table>
 </div>
-<p>What the ratings mean: see <a href="methods.html#ratings">rating definitions</a>.</p>"""
+{ratings_link}"""
     page("scorecard.html", "Scorecard comparison", body)
 
 
@@ -265,8 +270,10 @@ def main():
     build_comparison()
     for c in CAPTCHAS:
         build_captcha(c)
-    build_checklist()
-    build_methods()
+    if HAS_CHECKLIST:
+        build_checklist()
+    if HAS_METHODS:
+        build_methods()
     print(f"Built {len(list(OUT.glob('*.html')))} pages into {OUT}/")
 
 

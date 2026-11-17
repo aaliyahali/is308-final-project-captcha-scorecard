@@ -12,7 +12,7 @@
       "test_date": "",
       "demo_url": "https://www.google.com/recaptcha/api2/demo",
       "tools": "VoiceOver (macOS), Safari/Chrome, keyboard only (mouse disabled), browser zoom 200%, axe DevTools",
-      "overall": "Preliminary: the checkbox itself is labeled and keyboard-operable, but users who get escalated face an image grid with no text alternative and an audio fallback that is slow and error-prone.",
+      "overall": "The checkbox itself is labeled and keyboard-operable, but users who get escalated face an image grid with no text alternative and an audio fallback that is slow and error-prone.",
       "best_for": "Sites that need a familiar baseline and expect most users to pass at the checkbox step.",
       "watch_out_for": "Escalation to the image grid; the audio fallback; the verification expiring before the form is submitted.",
       "experience": {
@@ -47,7 +47,7 @@
       "test_date": "",
       "demo_url": "https://accounts.hcaptcha.com/demo",
       "tools": "VoiceOver (macOS), Safari/Chrome, keyboard only (mouse disabled), browser zoom 200%, axe DevTools",
-      "overall": "Preliminary: accessibility depends on options outside the user's control (the site owner enabling the text challenge) or on a cookie that requires email registration and cross-site cookies.",
+      "overall": "Accessibility depends on options outside the user's control (the site owner enabling the text challenge) or on a cookie that requires email registration and cross-site cookies.",
       "best_for": "Sites willing to enable the text-based accessibility challenge.",
       "watch_out_for": "The accessibility cookie breaking under browsers that block cross-site cookies (Safari by default); image challenges with no alternative when the text challenge is off.",
       "experience": {
@@ -82,7 +82,7 @@
       "test_date": "",
       "demo_url": "https://demo.turnstile.workers.dev/",
       "tools": "VoiceOver (macOS), Safari/Chrome, keyboard only (mouse disabled), browser zoom 200%, axe DevTools",
-      "overall": "Preliminary: with no puzzle, most criteria are easy to meet. The main risk is a false positive (privacy browsers, VPNs, assistive tech) that leaves the user stuck with no alternative.",
+      "overall": "With no puzzle, most criteria are easy to meet. The main risk is a false positive (privacy browsers, VPNs, assistive tech) that leaves the user stuck with no alternative.",
       "best_for": "Most sign-up, login and contact forms.",
       "watch_out_for": "Users blocked with no fallback when the check fails; the widget needs JavaScript.",
       "experience": {
@@ -117,7 +117,7 @@
       "test_date": "",
       "demo_url": "https://www.geetest.com/en/adaptive-captcha-demo",
       "tools": "VoiceOver (macOS), Safari/Chrome, keyboard only (mouse disabled), browser zoom 200%, axe DevTools",
-      "overall": "Preliminary: the drag interaction is the barrier this audit is built around; keyboard-only and screen-reader users depend on whether the voice option exists and can be reached.",
+      "overall": "The drag interaction is the barrier this audit is built around; keyboard-only and screen-reader users depend on whether the voice option exists and can be reached.",
       "best_for": "Not recommended where keyboard-only or screen-reader users are expected, unless the voice option is enabled and reachable by keyboard.",
       "watch_out_for": "Drag-only completion; the voice option being hidden or off.",
       "experience": {
