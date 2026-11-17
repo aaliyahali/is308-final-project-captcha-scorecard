@@ -1,0 +1,27 @@
+name: Feedback or suggested change
+description: Report a problem with the site, question a rating, or suggest an improvement.
+labels: [feedback]
+body:
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What kind of feedback is this?
+      options:
+        - A rating or note looks wrong
+        - An accessibility problem with this website
+        - A suggestion for the developer checklist
+        - Something else
+    validations:
+      required: true
+  - type: input
+    id: page
+    attributes:
+      label: Which page or CAPTCHA?
+      placeholder: e.g. hCaptcha, criterion 2.1.1
+  - type: textarea
+    id: details
+    attributes:
+      label: Details
+      description: What happened or what should change? If you tested something, tell us the assistive technology, browser and date.
+    validations:
+      required: true

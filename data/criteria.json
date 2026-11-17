@@ -1,0 +1,27 @@
+{
+  "_comment": "SHARED. The 10 WCAG 2.2 criteria, in display order, grouped by who they affect most. Edit only by agreement.",
+  "groups": [
+    {"id": "sr", "label": "Screen-reader users", "criteria": ["1.1.1", "1.3.1", "4.1.2"]},
+    {"id": "lv", "label": "Low-vision users", "criteria": ["1.4.4", "2.4.7"]},
+    {"id": "kb", "label": "Keyboard and motor-impaired users", "criteria": ["2.1.1", "2.2.1", "2.5.7", "2.5.8"]},
+    {"id": "both", "label": "Both groups", "criteria": ["3.3.8"]}
+  ],
+  "criteria": {
+    "1.1.1": {"name": "Non-text Content", "level": "A", "check": "A text label names the CAPTCHA's purpose, and a non-visual alternative exists.", "url": "https://www.w3.org/WAI/WCAG22/Understanding/non-text-content.html"},
+    "1.3.1": {"name": "Info and Relationships", "level": "A", "check": "Instructions and inputs are tied together for screen readers.", "url": "https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html"},
+    "1.4.4": {"name": "Resize Text", "level": "AA", "check": "The CAPTCHA is still usable at 200% zoom.", "url": "https://www.w3.org/WAI/WCAG22/Understanding/resize-text.html"},
+    "2.1.1": {"name": "Keyboard", "level": "A", "check": "Every step works with Tab, Enter, Space and the arrow keys only.", "url": "https://www.w3.org/WAI/WCAG22/Understanding/keyboard.html"},
+    "2.2.1": {"name": "Timing Adjustable", "level": "A", "check": "Time limits can be extended or are long enough.", "url": "https://www.w3.org/WAI/WCAG22/Understanding/timing-adjustable.html"},
+    "2.4.7": {"name": "Focus Visible", "level": "AA", "check": "Keyboard focus is always visible.", "url": "https://www.w3.org/WAI/WCAG22/Understanding/focus-visible.html"},
+    "2.5.7": {"name": "Dragging Movements", "level": "AA", "check": "There is a way to finish without dragging.", "url": "https://www.w3.org/WAI/WCAG22/Understanding/dragging-movements.html"},
+    "2.5.8": {"name": "Target Size (Minimum)", "level": "AA", "check": "Clickable targets are at least 24 by 24 CSS pixels.", "url": "https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html"},
+    "3.3.8": {"name": "Accessible Authentication (Minimum)", "level": "AA", "check": "On a login, there is a path that needs no puzzle-solving.", "url": "https://www.w3.org/WAI/WCAG22/Understanding/accessible-authentication-minimum.html"},
+    "4.1.2": {"name": "Name, Role, Value", "level": "A", "check": "Controls are announced correctly in VoiceOver.", "url": "https://www.w3.org/WAI/WCAG22/Understanding/name-role-value.html"}
+  },
+  "ratings": {
+    "pass": {"label": "Pass", "icon": "✓", "meaning": "Meets the criterion for screen-reader and keyboard-only users in our testing."},
+    "partial": {"label": "Partial", "icon": "◐", "meaning": "Meets it only on some paths, only when the site owner turns an option on, or with significant friction."},
+    "fail": {"label": "Fail", "icon": "✕", "meaning": "Does not meet the criterion; a screen-reader or keyboard-only user is blocked or has no working alternative."},
+    "untested": {"label": "Not yet rated", "icon": "?", "meaning": "No rating yet."}
+  }
+}

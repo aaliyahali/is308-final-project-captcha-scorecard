@@ -1,0 +1,145 @@
+{
+  "_comment": "PART 1 DATA. One object per CAPTCHA. Each tester edits only their own CAPTCHA's object. Every rating starts with \"verified\": false (shown on the site as Preliminary). After hands-on testing with VoiceOver and keyboard-only, update rating + note and set verified to true. Ratings: pass | partial | fail | untested.",
+  "captchas": [
+    {
+      "id": "recaptcha-v2",
+      "name": "Google reCAPTCHA v2",
+      "vendor": "Google",
+      "style": "Checkbox with image-grid escalation and an audio fallback",
+      "description": "An \"I'm not a robot\" checkbox. If Google's risk check is unsure, it escalates to an image grid (\"select all squares with traffic lights\"), with an audio challenge as the fallback.",
+      "tester": "TBD",
+      "cross_checker": "TBD",
+      "test_date": "",
+      "demo_url": "https://www.google.com/recaptcha/api2/demo",
+      "tools": "VoiceOver (macOS), Safari/Chrome, keyboard only (mouse disabled), browser zoom 200%, axe DevTools",
+      "overall": "Preliminary: the checkbox itself is labeled and keyboard-operable, but users who get escalated face an image grid with no text alternative and an audio fallback that is slow and error-prone.",
+      "best_for": "Sites that need a familiar baseline and expect most users to pass at the checkbox step.",
+      "watch_out_for": "Escalation to the image grid; the audio fallback; the verification expiring before the form is submitted.",
+      "experience": {
+        "screen_reader": "To be written after VoiceOver testing. Things to note: is the checkbox announced with its name and state; can you find the \"Get an audio challenge\" button; does the audio clip talk over VoiceOver; is the answer field labeled; how long does it take.",
+        "keyboard": "To be written after keyboard-only testing. Things to note: can you Tab to the checkbox and press Space; inside the image grid, can you reach every tile, Verify, and the audio button; is focus visible on every step."
+      },
+      "claims_vs_found": {
+        "claim": "Google's help page describes a keyboard and screen-reader path: an audio challenge, with focus moved to the play button and to error messages, and the screen reader notified on success.",
+        "found": "To be completed after testing. Earlier user reports describe the audio answer field lacking an accessible name and challenges expiring before they can be answered (WebAIM list, 2015); confirm whether that still happens."
+      },
+      "results": {
+        "1.1.1": {"rating": "partial", "verified": false, "note": "Checkbox is labeled and an audio alternative exists, but audio success rates for blind users are low (Bigham & Cavender, 2009)."},
+        "1.3.1": {"rating": "partial", "verified": false, "note": "Check whether the audio challenge's instructions and answer field are programmatically linked."},
+        "1.4.4": {"rating": "partial", "verified": false, "note": "Fixed-size iframe; check whether the image grid stays usable at 200% zoom."},
+        "2.1.1": {"rating": "pass", "verified": false, "note": "Google documents a keyboard path through the checkbox and audio challenge; confirm the image grid tiles are reachable."},
+        "2.2.1": {"rating": "partial", "verified": false, "note": "Verification expires after a set time with no way to extend it; audio challenges can expire mid-answer."},
+        "2.4.7": {"rating": "partial", "verified": false, "note": "Past audits report weak focus visibility inside the challenge widget; confirm."},
+        "2.5.7": {"rating": "pass", "verified": false, "note": "No dragging required."},
+        "2.5.8": {"rating": "pass", "verified": false, "note": "Measure the checkbox and the grid's icon buttons (reload, audio, info)."},
+        "3.3.8": {"rating": "partial", "verified": false, "note": "Image recognition falls under a WCAG exception, but the audio transcription does not; no puzzle-free path unless the site adds one."},
+        "4.1.2": {"rating": "partial", "verified": false, "note": "Checkbox name and checked state should be announced; check the audio answer field's name."}
+      }
+    },
+    {
+      "id": "hcaptcha",
+      "name": "hCaptcha",
+      "vendor": "Intuition Machines",
+      "style": "Image labeling, with an accessibility option",
+      "description": "A checkbox that usually leads to image-labeling tasks. It offers two accessibility routes: a text-based challenge (only if the site owner enables it) and an accessibility cookie users register for by email.",
+      "tester": "TBD",
+      "cross_checker": "TBD",
+      "test_date": "",
+      "demo_url": "https://accounts.hcaptcha.com/demo",
+      "tools": "VoiceOver (macOS), Safari/Chrome, keyboard only (mouse disabled), browser zoom 200%, axe DevTools",
+      "overall": "Preliminary: accessibility depends on options outside the user's control (the site owner enabling the text challenge) or on a cookie that requires email registration and cross-site cookies.",
+      "best_for": "Sites willing to enable the text-based accessibility challenge.",
+      "watch_out_for": "The accessibility cookie breaking under browsers that block cross-site cookies (Safari by default); image challenges with no alternative when the text challenge is off.",
+      "experience": {
+        "screen_reader": "To be written after VoiceOver testing. Things to note: is the menu with the accessibility option reachable and announced; is the text challenge offered on the demo; does the accessibility cookie work in Safari with default settings.",
+        "keyboard": "To be written after keyboard-only testing. Things to note: can you reach and select image tiles with the keyboard; does any challenge variant require dragging."
+      },
+      "claims_vs_found": {
+        "claim": "hCaptcha says users can choose a text-based Accessibility Challenge from the widget menu when the site enables it, or register for an accessibility cookie that lets them pass automatically or get a text challenge.",
+        "found": "To be completed after testing. User reports (AppleVis) say the cookie lasts about 24 hours and requires turning on cross-site cookies in Safari; check both routes."
+      },
+      "results": {
+        "1.1.1": {"rating": "partial", "verified": false, "note": "A non-visual route exists only if the site enables the text challenge or the user has registered for the cookie."},
+        "1.3.1": {"rating": "partial", "verified": false, "note": "Check that the challenge prompt is associated with the tiles or text field."},
+        "1.4.4": {"rating": "partial", "verified": false, "note": "Check whether the challenge popup fits and stays usable at 200% zoom."},
+        "2.1.1": {"rating": "partial", "verified": false, "note": "Check keyboard access to every tile and to the accessibility menu."},
+        "2.2.1": {"rating": "partial", "verified": false, "note": "Check whether challenges time out and whether that can be extended."},
+        "2.4.7": {"rating": "partial", "verified": false, "note": "Check focus visibility on tiles and menu items."},
+        "2.5.7": {"rating": "partial", "verified": false, "note": "Some challenge variants ask users to drag a piece; check whether there's a non-drag option."},
+        "2.5.8": {"rating": "pass", "verified": false, "note": "Measure the checkbox, tiles and menu button."},
+        "3.3.8": {"rating": "partial", "verified": false, "note": "The cookie gives a puzzle-free path, but only after email registration and with cross-site cookies allowed."},
+        "4.1.2": {"rating": "partial", "verified": false, "note": "Check what VoiceOver announces for the checkbox, tiles and menu."}
+      }
+    },
+    {
+      "id": "turnstile",
+      "name": "Cloudflare Turnstile",
+      "vendor": "Cloudflare",
+      "style": "Mostly invisible check (no puzzle)",
+      "description": "Runs checks on browser signals and behavior in the background. Users usually see a widget that verifies on its own, or a checkbox to click; there is no image or audio puzzle.",
+      "tester": "TBD",
+      "cross_checker": "TBD",
+      "test_date": "",
+      "demo_url": "https://demo.turnstile.workers.dev/",
+      "tools": "VoiceOver (macOS), Safari/Chrome, keyboard only (mouse disabled), browser zoom 200%, axe DevTools",
+      "overall": "Preliminary: with no puzzle, most criteria are easy to meet. The main risk is a false positive (privacy browsers, VPNs, assistive tech) that leaves the user stuck with no alternative.",
+      "best_for": "Most sign-up, login and contact forms.",
+      "watch_out_for": "Users blocked with no fallback when the check fails; the widget needs JavaScript.",
+      "experience": {
+        "screen_reader": "To be written after VoiceOver testing. Things to note: is the widget's status (verifying, success, failure) announced; is the checkbox, if shown, labeled.",
+        "keyboard": "To be written after keyboard-only testing. Things to note: can you Tab to and activate the checkbox; is focus visible; what happens on failure."
+      },
+      "claims_vs_found": {
+        "claim": "Cloudflare's developer docs state that Turnstile is WCAG 2.2 AA compliant; a 2026 redesign aimed for WCAG 2.2 AAA.",
+        "found": "To be completed after testing. The compliance claim is self-declared; no independent audit was found."
+      },
+      "results": {
+        "1.1.1": {"rating": "pass", "verified": false, "note": "No visual puzzle; confirm the widget has a text label."},
+        "1.3.1": {"rating": "pass", "verified": false, "note": "Confirm status messages are linked to the widget."},
+        "1.4.4": {"rating": "pass", "verified": false, "note": "Check the widget at 200% zoom."},
+        "2.1.1": {"rating": "pass", "verified": false, "note": "Confirm the checkbox (when shown) is keyboard-operable."},
+        "2.2.1": {"rating": "pass", "verified": false, "note": "No user task to time; check whether a token expiry forces a redo."},
+        "2.4.7": {"rating": "pass", "verified": false, "note": "Confirm a visible focus ring on the checkbox."},
+        "2.5.7": {"rating": "pass", "verified": false, "note": "No dragging."},
+        "2.5.8": {"rating": "pass", "verified": false, "note": "Measure the checkbox."},
+        "3.3.8": {"rating": "pass", "verified": false, "note": "No cognitive function test."},
+        "4.1.2": {"rating": "partial", "verified": false, "note": "Community reports of screen-reader issues before the 2026 redesign; confirm the status changes are announced."}
+      }
+    },
+    {
+      "id": "slider",
+      "name": "Slider / puzzle CAPTCHA (GeeTest v4)",
+      "vendor": "GeeTest",
+      "style": "Drag puzzle",
+      "description": "Asks users to drag a slider so a puzzle piece fits its slot. It judges both where the piece ends up and how the drag moves. GeeTest says it also offers a voice verification option.",
+      "tester": "TBD",
+      "cross_checker": "TBD",
+      "test_date": "",
+      "demo_url": "https://www.geetest.com/en/adaptive-captcha-demo",
+      "tools": "VoiceOver (macOS), Safari/Chrome, keyboard only (mouse disabled), browser zoom 200%, axe DevTools",
+      "overall": "Preliminary: the drag interaction is the barrier this audit is built around; keyboard-only and screen-reader users depend on whether the voice option exists and can be reached.",
+      "best_for": "Not recommended where keyboard-only or screen-reader users are expected, unless the voice option is enabled and reachable by keyboard.",
+      "watch_out_for": "Drag-only completion; the voice option being hidden or off.",
+      "experience": {
+        "screen_reader": "To be written after VoiceOver testing. Things to note: is the slider announced at all; is the voice verification option reachable and labeled.",
+        "keyboard": "To be written after keyboard-only testing. Things to note: can the slider be moved with arrow keys; can the voice option be reached with Tab."
+      },
+      "claims_vs_found": {
+        "claim": "GeeTest's v4 documentation says it supports an accessibility-friendly voice verification option alongside the slide puzzle.",
+        "found": "To be completed after testing. Check whether the voice option appears on the demo and works with keyboard and VoiceOver."
+      },
+      "results": {
+        "1.1.1": {"rating": "partial", "verified": false, "note": "A voice option is claimed; confirm it exists on the demo and is labeled."},
+        "1.3.1": {"rating": "fail", "verified": false, "note": "Check whether the instructions are tied to the slider control."},
+        "1.4.4": {"rating": "partial", "verified": false, "note": "Check the puzzle at 200% zoom."},
+        "2.1.1": {"rating": "fail", "verified": false, "note": "Drag puzzle; check whether arrow keys move the slider or the voice option is keyboard-reachable."},
+        "2.2.1": {"rating": "partial", "verified": false, "note": "Check for time-outs."},
+        "2.4.7": {"rating": "fail", "verified": false, "note": "Check whether the slider handle shows focus."},
+        "2.5.7": {"rating": "fail", "verified": false, "note": "Drag required unless the voice option is available."},
+        "2.5.8": {"rating": "pass", "verified": false, "note": "Measure the slider handle."},
+        "3.3.8": {"rating": "fail", "verified": false, "note": "No puzzle-free path unless the site adds one."},
+        "4.1.2": {"rating": "fail", "verified": false, "note": "Check whether the slider has a role, name and value."}
+      }
+    }
+  ]
+}
