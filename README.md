@@ -1,6 +1,6 @@
 # CAPTCHA Accessibility Scorecard
 
-**Live site:** https://OWNER.github.io/captcha-scorecard/ <!-- TODO: replace OWNER -->
+**Live site:** https://aaliyahali.github.io/is308-final-project-captcha-scorecard/
 
 ## Purpose
 
