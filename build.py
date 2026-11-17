@@ -19,7 +19,7 @@ from pathlib import Path
 ROOT = Path(__file__).parent
 OUT = ROOT / "_site"
 SITE_NAME = "CAPTCHA Accessibility Scorecard"
-REPO_URL = "https://github.com/OWNER/captcha-scorecard"  # TODO: replace OWNER after creating the repo
+REPO_URL = "https://aaliyahali.github.io/is308-final-project-captcha-scorecard/" 
 
 crit_data = json.loads((ROOT / "data/criteria.json").read_text(encoding="utf-8"))
 CRITERIA = crit_data["criteria"]
